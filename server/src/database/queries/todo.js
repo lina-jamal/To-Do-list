@@ -12,9 +12,9 @@ todoQueries.createTodo = ({
 }) =>
   todo.create({ userID, title, description, important, done, category, time });
 
-todoQueries.deleteTodo = (id) => todo.findByIdAndDelete(id);
-
 todoQueries.findTasksByUserID = (userID) => todo.find({ userID });
+
+todoQueries.deleteTodo = (id) => todo.findByIdAndDelete(id);
 
 todoQueries.editTodo = (id, { title, description, important, done, time }) =>
   todo.findByIdAndUpdate(id, { title, description, important, done, time });
