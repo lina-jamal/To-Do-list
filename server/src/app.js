@@ -1,9 +1,10 @@
-const express = require("express");
 const { join } = require("path");
+const express = require("express");
 const compression = require("compression");
 const cookieParser = require("cookie-parser");
 
 const router = require("./router");
+const connection = require("./database/dbConnection");
 
 const app = express();
 
@@ -17,6 +18,12 @@ const middlewares = [
   express.urlencoded({ extended: false }),
   express.json(),
 ];
+
+app.use(middlewares);
+
+connection
+  .on("open", () => console.log("mongo database is connected"))
+  .on("error", () => process.exit(1));
 
 app.use(middlewares);
 app.use("/api/v1", router);
