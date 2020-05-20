@@ -24,6 +24,7 @@ const TodosSchema = new Schema({
   },
   time: {
     type: Date,
+    default: Date.now,
     required: true,
   },
 });
