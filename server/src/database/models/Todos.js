@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, models } = require("mongoose");
 
 const TodosSchema = new Schema({
   userID: {
@@ -28,5 +28,6 @@ const TodosSchema = new Schema({
     required: true,
   },
 });
+module.exports = models.Todos || model("Todos", TodosSchema);
 
-module.exports = model("Todos", TodosSchema);
+// module.exports = model("Todos", TodosSchema);

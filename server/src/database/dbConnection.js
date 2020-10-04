@@ -1,17 +1,25 @@
 const mongoose = require("mongoose");
+
 require("env2")("config.env");
 
-let dbURI = "";
-if (process.env.NODE_ENV === "production") {
-  dbURI = process.env.PRODUCT_URI;
-} else {
-  dbURI = process.env.DEV_URI;
+let dbURI;
+switch (process.env.NODE_ENV) {
+  case "production":
+    dbURI = process.env.MONGO_URI;
+    break;
+  case "development":
+    dbURI = process.env.DEV_URI;
+    break;
+
+  default:
+    throw new Error("No Database URL!!!");
 }
 mongoose
   .connect(dbURI, {
-    useUnifiedTopology: true,
     useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
+  .then(() => console.log("database connection successful"))
   .catch((e) => {
     console.error("Connection error :=>", e.message);
   });
