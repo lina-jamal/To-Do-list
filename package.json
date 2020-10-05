@@ -28,6 +28,7 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "env2": "^2.2.2"
   }
 }
