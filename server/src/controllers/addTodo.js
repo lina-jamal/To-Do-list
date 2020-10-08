@@ -25,7 +25,7 @@ module.exports = async (req, res, next) => {
       });
       res.json("Todo successfully created ");
     } else {
-      res.json("Sorry ... You have interfere at this time");
+      res.status(400).json("Sorry ... You have interfere at this time");
     }
   } catch (err) {
     next(err);

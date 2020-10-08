@@ -3,10 +3,10 @@ const express = require("express");
 const compression = require("compression");
 const cookieParser = require("cookie-parser");
 
-const router = require("./router");
 const connection = require("./database/dbConnection");
 
 const app = express();
+const router = require("./router");
 
 app.disabled("x-powered-by");
 
@@ -20,13 +20,12 @@ const middlewares = [
 ];
 
 app.use(middlewares);
+app.use("/api/v1", router);
 
 connection
   .on("open", () => console.log("mongo database is connected"))
   .on("error", () => process.exit(1));
 
-app.use(middlewares);
-app.use("/api/v1", router);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(join(__dirname, "..", "client", "build")));
   app.all("*", (req, res) =>
