@@ -1,18 +1,14 @@
 const todoSchema = require("./validation/todoSchema");
 const Todos = require("../database/models/Todos");
 
-module.exports = async (req, res, next) => {
-  console.log(req.body);
-
+const addTodo = async (req, res, next) => {
   const { title, description, important, done, time } = req.body;
   try {
-    const { error } = await todoSchema.validate(
-      { title, description, important, done, time },
-      { abortEarly: false }
-    );
-    if (error) {
-      throw error.details;
-    }
+    await todoSchema
+      .validateAsync({ title, description, important, done, time })
+      .catch((error) => {
+        throw error.details;
+      });
     const interfereTime = await Todos.find({ userID: 99999, time });
     if (interfereTime.length === 0) {
       await Todos.create({
@@ -31,3 +27,4 @@ module.exports = async (req, res, next) => {
     next(err);
   }
 };
+module.exports = addTodo;
