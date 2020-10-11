@@ -4,7 +4,9 @@ const {
   getTodos,
   clientError,
   serverError,
+  googleLogin,
 } = require("./controllers");
+router.post("/login/google", googleLogin);
 
 router.post("/Todo", addTodo);
 router.get("/Todos", getTodos);
