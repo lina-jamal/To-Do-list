@@ -1,22 +1,19 @@
-const axios = require("axios");
-const { sign } = require("jsonwebtoken");
-require("env2")("config.env");
+const { signToken, verifyGoogleToken } = require("../utils");
 
 const googleLogin = async (req, res, next) => {
   try {
-    const { tokenId, googleId } = req.body;
+    const { tokenId } = req.body;
+    let payload;
+    const { name, googleId } = await verifyGoogleToken(tokenId);
 
-    // request user details:
-    const idInfo = await axios.get(
-      `https://oauth2.googleapis.com/tokeninfo?id_token=${tokenId}`
-    );
+    payload = { userId: googleId, name };
 
-    const { name } = idInfo.data;
-    const token = sign({ userId: googleId, name }, process.env.SECRET_KEY);
-    res.cookie("token", token);
-    res.end();
+    const token = await signToken(payload);
+    return res
+      .cookie("token", token)
+      .json({ statusCode: 200, message: "logged in successfully" });
   } catch (err) {
-    next(err);
+    return next(err);
   }
 };
 
