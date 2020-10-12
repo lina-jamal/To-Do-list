@@ -1,10 +1,12 @@
-const { verifyGoogleToken } = require("../utils");
+const { verifyToken } = require("../utils");
 
 const Auth = async (req, res, next) => {
   try {
     const { token } = req.cookies;
-    const userData = await verifyGoogleToken(token);
+    const userData = await verifyToken(token);
+
     req.userData = userData;
+    console.log(userData, 4444);
     return next();
   } catch (err) {
     if (err.message === "jwt must be provided") {

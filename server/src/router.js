@@ -9,6 +9,10 @@ const {
 const Auth = require("./middleware/Auth");
 router.post("/login/google", googleLogin);
 router.use(Auth);
+router.get("/auth", (req, res) => {
+  console.log(req, 7878);
+  res.json(req.userData);
+});
 
 router.post("/Todo", addTodo);
 router.get("/Todos", getTodos);

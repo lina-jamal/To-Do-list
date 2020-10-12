@@ -1,3 +1,4 @@
 const verifyGoogleToken = require("./verifyGoogleToken");
 const signToken = require("./signToken");
-module.exports = { verifyGoogleToken, signToken };
+const verifyToken = require("./verifyToken");
+module.exports = { verifyGoogleToken, signToken, verifyToken };
