@@ -6,7 +6,9 @@ const {
   serverError,
   googleLogin,
 } = require("./controllers");
+const Auth = require("./middleware/Auth");
 router.post("/login/google", googleLogin);
+router.use(Auth);
 
 router.post("/Todo", addTodo);
 router.get("/Todos", getTodos);

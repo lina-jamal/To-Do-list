@@ -29,6 +29,8 @@
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
-    "env2": "^2.2.2"
+    "env2": "^2.2.2",
+    "google-auth-library": "^6.1.1",
+    "jsonwebtoken": "^8.5.1"
   }
 }
