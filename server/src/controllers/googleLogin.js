@@ -2,10 +2,9 @@ const { signToken, verifyGoogleToken } = require("../utils");
 
 const googleLogin = async (req, res, next) => {
   try {
-    const { tokenId } = req.body;
-    console.log(tokenId, 8787);
+    const { tokenId, googleId } = req.body;
     let payload;
-    const { name, googleId } = await verifyGoogleToken(tokenId);
+    const { name } = await verifyGoogleToken(tokenId);
 
     payload = { userId: googleId, name };
 
