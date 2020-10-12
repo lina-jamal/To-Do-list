@@ -3,6 +3,7 @@ const { signToken, verifyGoogleToken } = require("../utils");
 const googleLogin = async (req, res, next) => {
   try {
     const { tokenId } = req.body;
+    console.log(tokenId, 8787);
     let payload;
     const { name, googleId } = await verifyGoogleToken(tokenId);
 
