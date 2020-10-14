@@ -1,7 +1,6 @@
 const Todos = require("../database/models/Todos");
 const todoSchema = require("./validation/todoSchema");
 
-// app.put("/todos/:id", async (req, res, next) => {
 const editTodo = async (req, res, next) => {
   const { id } = req.params;
   const { userId } = req.userData;

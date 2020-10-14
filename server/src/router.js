@@ -7,6 +7,7 @@ const {
   clientError,
   serverError,
   googleLogin,
+  logout,
 } = require("./controllers");
 const Auth = require("./middleware/Auth");
 router.post("/login/google", googleLogin);
@@ -14,7 +15,7 @@ router.use(Auth);
 router.get("/auth", (req, res) => {
   res.json(req.userData);
 });
-
+router.get("/logout", logout);
 router.post("/Todo", addTodo);
 router.put("/Todos/:id", editTodo);
 router.delete("/Todos/:id", deleteTodo);
