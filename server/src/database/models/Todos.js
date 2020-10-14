@@ -29,5 +29,3 @@ const TodosSchema = new Schema({
   },
 });
 module.exports = models.Todos || model("Todos", TodosSchema);
-
-// module.exports = model("Todos", TodosSchema);

@@ -6,7 +6,6 @@ const Auth = async (req, res, next) => {
     const userData = await verifyToken(token);
 
     req.userData = userData;
-    console.log(userData, 4444);
     return next();
   } catch (err) {
     if (err.message === "jwt must be provided") {
