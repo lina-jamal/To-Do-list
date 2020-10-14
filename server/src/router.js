@@ -3,6 +3,7 @@ const {
   addTodo,
   getTodos,
   editTodo,
+  deleteTodo,
   clientError,
   serverError,
   googleLogin,
@@ -16,6 +17,7 @@ router.get("/auth", (req, res) => {
 
 router.post("/Todo", addTodo);
 router.put("/Todos/:id", editTodo);
+router.delete("/Todos/:id", deleteTodo);
 router.get("/Todos", getTodos);
 
 router.use(clientError);
