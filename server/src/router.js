@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
   addTodo,
   getTodos,
+  editTodo,
   clientError,
   serverError,
   googleLogin,
@@ -14,6 +15,7 @@ router.get("/auth", (req, res) => {
 });
 
 router.post("/Todo", addTodo);
+router.put("/Todos/:id", editTodo);
 router.get("/Todos", getTodos);
 
 router.use(clientError);
