@@ -1,7 +1,8 @@
 const Todos = require("../database/models/Todos");
 const getTodos = async (req, res, next) => {
   try {
-    const todos = await Todos.find({});
+    const { userId } = req.userData;
+    const todos = await Todos.find({ userId });
     if (todos.length > 0) {
       res.status(200).json(todos);
     } else {
