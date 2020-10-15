@@ -2,7 +2,7 @@ import React from "react";
 import { GoogleLogin } from "react-google-login";
 
 const axios = require("axios");
-function Login() {
+function Login({ setAuth }) {
   const failureResponse = (response) => {
     console.log("error", response);
   };
@@ -10,6 +10,7 @@ function Login() {
     const { tokenId, googleId } = res;
     try {
       await axios.post("/api/v1/login/google", { tokenId, googleId });
+      setAuth(true);
     } catch ({ response }) {
       console.log(response);
     }
