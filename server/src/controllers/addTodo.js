@@ -14,7 +14,7 @@ const addTodo = async (req, res, next) => {
     const interfereTime = await Todos.find({ userID: userId, time });
     if (interfereTime.length === 0) {
       await Todos.create({
-        userID,
+        userID: userId,
         title,
         description,
         important,
