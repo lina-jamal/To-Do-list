@@ -25,13 +25,83 @@ const Todos = ({ name }) => {
       throw err;
     }
   };
+  const editTodo = (id, title, description, time, important, done) => {
+    setShow(true);
+    setEdit(true);
+    setTodo({ id, title, description, time, important, done });
+  };
   useEffect(() => {
     fetchTodo();
   }, []);
 
   return (
     <>
-      <button
+      <div className="todoContainer">
+        <button
+          type="button"
+          onClick={() => {
+            setShow(true);
+            setTodo({
+              userId: "",
+              title: "",
+              description: "",
+              time: new Date(),
+              important: false,
+              done: false,
+            });
+          }}
+        >
+          Add Todo
+        </button>
+        <div className="mytodo">
+          {todos.length > 0
+            ? todos.map((todo) => (
+                <div key={todo._id} className="todo">
+                  <h3
+                    onClick={() =>
+                      editTodo(
+                        todo._id,
+                        todo.title,
+                        todo.description,
+                        todo.time,
+                        todo.important,
+                        todo.done
+                      )
+                    }
+                  >
+                    {todo.title}
+                  </h3>
+                  <div className="todo_controller">
+                    <button type="button" onClick={() => console.log("hi")}>
+                      <i className="fas fa-trash-alt"> del</i>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        editTodo(
+                          todo._id,
+                          todo.title,
+                          todo.description,
+                          todo.time,
+                          todo.important,
+                          todo.done
+                        )
+                      }
+                    >
+                      <i className="fas fa-edit"> edit</i>
+                    </button>
+                  </div>
+                  <p>{todo.description}</p>
+                  <span>{todo.emportant}</span>
+                  <span>{todo.dine}</span>
+
+                  <span>{todo.time}</span>
+                </div>
+              ))
+            : null}
+        </div>
+      </div>
+      {/* <button
         type="button"
         onClick={() => {
           setShow(true);
@@ -47,18 +117,18 @@ const Todos = ({ name }) => {
       >
         {" "}
         Add Todo
-      </button>
-      {todos.length > 0
+      </button> */}
+      {/* {todos.length > 0
         ? todos.map((item) => (
             <div key={item._id}>
               <h1>{item.title}</h1>
             </div>
           ))
-        : null}
+        : null} */}
       {showForm && (
         <TodoForm
-          //   edit={edit}
-          //   setEdit={setEdit}
+          edit={edit}
+          setEdit={setEdit}
           setShow={setShow}
           setTodo={setTodo}
           todo={todo}
