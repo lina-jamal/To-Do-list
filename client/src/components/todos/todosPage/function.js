@@ -3,7 +3,6 @@ import axios from "axios";
 export const fetchTodo = async (setTodos, setLoading) => {
   try {
     const { data } = await axios.get("/api/v1/Todos");
-    console.log(data, 777);
 
     setTodos(data);
     setLoading(false);

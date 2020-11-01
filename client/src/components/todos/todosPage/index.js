@@ -4,8 +4,9 @@ import Loader from "react-loader-spinner";
 import TodoForm from "../todoForm";
 import Header from "../../header";
 import { fetchTodo, editTodo, deleteTodo } from "./function";
+import { addTodo } from "../todoForm/function";
 
-const Todos = ({ name }) => {
+const Todos = ({ name, setAuth }) => {
   const [loading, setLoading] = useState(true);
   const [edit, setEdit] = useState(false);
   const [showForm, setShow] = useState(false);
@@ -18,30 +19,27 @@ const Todos = ({ name }) => {
     important: false,
     done: false,
   });
-  console.log(todos, 4444);
 
   useEffect(() => {
     fetchTodo(setTodos, setLoading);
   }, [todos.length === 0]);
 
+  const addTodo = () => {
+    setShow(true);
+    setTodo({
+      userId: "",
+      title: "",
+      description: "",
+      time: new Date(),
+      important: false,
+      done: false,
+    });
+  };
   return (
     <>
-      <Header />
+      <Header name={name} setAuth={setAuth} addTodo={addTodo} />
       <div className="todoContainer">
-        <button
-          type="button"
-          onClick={() => {
-            setShow(true);
-            setTodo({
-              userId: "",
-              title: "",
-              description: "",
-              time: new Date(),
-              important: false,
-              done: false,
-            });
-          }}
-        >
+        <button type="button" onClick={() => addTodo()}>
           Add Todo
         </button>
         <div className="mytodo">
