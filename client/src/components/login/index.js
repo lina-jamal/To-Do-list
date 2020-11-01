@@ -1,6 +1,6 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
-
+import "./style.css";
 const axios = require("axios");
 
 function Login({ setAuth }) {
@@ -20,6 +20,12 @@ function Login({ setAuth }) {
 
   return (
     <div className="login">
+      <div className=" paragraph">
+        <br></br>
+        <p>Do you want to have an organized day</p>
+        <br></br>
+        <p>Lets Login First</p>
+      </div>
       <GoogleLogin
         clientId="423453055240-bpk4pljv8dtkfvstias9526fsvv4pep0.apps.googleusercontent.com"
         buttonText="Login Using Google"
