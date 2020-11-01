@@ -29,9 +29,11 @@
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "@szhsin/react-menu": "^0.11.1",
     "env2": "^2.2.2",
     "google-auth-library": "^6.1.1",
     "jsonwebtoken": "^8.5.1",
-    "react-loader-spinner": "^3.1.14"
+    "react-loader-spinner": "^3.1.14",
+    "react-router-dom": "^5.2.0"
   }
 }
