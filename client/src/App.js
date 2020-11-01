@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from "./components/login";
 import "./App.css";
-import Todos from "./components/todos";
+import Todos from "./components/todos/todosPage";
 const axios = require("axios");
 
 function App() {
@@ -25,8 +25,17 @@ function App() {
   }, []);
   return (
     <>
-      <Login setAuth={setAuth} />
-      <Todos name={name} />
+      <Router>
+        <Route
+          exact
+          path="/"
+          render={() =>
+            !auth ? <Login setAuth={setAuth} /> : <Todos name={name} />
+          }
+        ></Route>
+      </Router>
+      {/* <Login setAuth={setAuth} />
+      <Todos name={name} /> */}
     </>
   );
 }
