@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
-import TodoForm from "../todosForm";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
+import TodoForm from "../todoForm";
+import Header from "../../header";
 import { fetchTodo, editTodo, deleteTodo } from "./function";
+
 const Todos = ({ name }) => {
+  const [loading, setLoading] = useState(true);
   const [edit, setEdit] = useState(false);
   const [showForm, setShow] = useState(false);
   const [todos, setTodos] = useState([]);
@@ -13,13 +18,15 @@ const Todos = ({ name }) => {
     important: false,
     done: false,
   });
+  console.log(todos, 4444);
 
   useEffect(() => {
-    fetchTodo(setTodos);
-  }, []);
+    fetchTodo(setTodos, setLoading);
+  }, [todos.length === 0]);
 
   return (
     <>
+      <Header />
       <div className="todoContainer">
         <button
           type="button"
@@ -38,10 +45,32 @@ const Todos = ({ name }) => {
           Add Todo
         </button>
         <div className="mytodo">
-          {todos.length > 0
-            ? todos.map((todo) => (
-                <div key={todo._id} className="todo">
-                  <h3
+          {!loading && todos.length > 0 ? (
+            todos.map((todo) => (
+              <div key={todo._id} className="todo">
+                <h3
+                  onClick={() =>
+                    editTodo(
+                      todo._id,
+                      todo.title,
+                      todo.description,
+                      todo.time,
+                      todo.important,
+                      todo.done,
+                      setShow,
+                      setEdit,
+                      setTodo
+                    )
+                  }
+                >
+                  {todo.title}
+                </h3>
+                <div className="todo_controller">
+                  <button type="button" onClick={() => deleteTodo(todo._id)}>
+                    <i className="fas fa-trash-alt"> del</i>
+                  </button>
+                  <button
+                    type="button"
                     onClick={() =>
                       editTodo(
                         todo._id,
@@ -56,39 +85,20 @@ const Todos = ({ name }) => {
                       )
                     }
                   >
-                    {todo.title}
-                  </h3>
-                  <div className="todo_controller">
-                    <button type="button" onClick={() => deleteTodo(todo._id)}>
-                      <i className="fas fa-trash-alt"> del</i>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        editTodo(
-                          todo._id,
-                          todo.title,
-                          todo.description,
-                          todo.time,
-                          todo.important,
-                          todo.done,
-                          setShow,
-                          setEdit,
-                          setTodo
-                        )
-                      }
-                    >
-                      <i className="fas fa-edit"> edit</i>
-                    </button>
-                  </div>
-                  <p>{todo.description}</p>
-                  <span>{todo.emportant}</span>
-                  <span>{todo.dine}</span>
-
-                  <span>{todo.time}</span>
+                    <i className="fas fa-edit"> edit</i>
+                  </button>
                 </div>
-              ))
-            : null}
+                <p>{todo.description}</p>
+                <span>{todo.emportant}</span>
+                <span>{todo.dine}</span>
+
+                <span>{todo.time}</span>
+              </div>
+            ))
+          ) : (
+            // <h2>Loading ....!</h2>
+            <Loader type="ThreeDots" color="#00BFFF" height={60} width={60} />
+          )}
         </div>
       </div>
 

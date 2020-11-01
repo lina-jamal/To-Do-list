@@ -1,9 +1,12 @@
 import axios from "axios";
 
-export const fetchTodo = async (setTodos) => {
+export const fetchTodo = async (setTodos, setLoading) => {
   try {
     const { data } = await axios.get("/api/v1/Todos");
+    console.log(data, 777);
+
     setTodos(data);
+    setLoading(false);
   } catch (err) {
     throw err;
   }
@@ -26,7 +29,7 @@ export const editTodo = (
 };
 export const deleteTodo = async (id) => {
   try {
-    const { data } = await axios.delete(`/api/v1/Todos/${id}`);
+    await axios.delete(`/api/v1/Todos/${id}`);
     return id;
   } catch (err) {
     throw err;
