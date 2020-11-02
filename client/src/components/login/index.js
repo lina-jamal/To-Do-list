@@ -29,6 +29,15 @@ function Login({ setAuth }) {
       <GoogleLogin
         clientId="423453055240-bpk4pljv8dtkfvstias9526fsvv4pep0.apps.googleusercontent.com"
         buttonText="Login Using Google"
+        // render={(renderProps) => (
+        //   <button
+        //     className="google-btn"
+        //     onClick={renderProps.onClick}
+        //     disabled={renderProps.disabled}
+        //   >
+        //     Login
+        //   </button>
+        // )}
         onSuccess={successResponse}
         onFailure={failureResponse}
         cookiePolicy="single_host_origin"
