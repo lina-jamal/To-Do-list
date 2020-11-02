@@ -4,7 +4,6 @@ import Loader from "react-loader-spinner";
 import TodoForm from "../todoForm";
 import Header from "../../header";
 import { fetchTodo, editTodo, deleteTodo } from "./function";
-import { addTodo } from "../todoForm/function";
 
 const Todos = ({ name, setAuth }) => {
   const [loading, setLoading] = useState(true);
@@ -64,7 +63,15 @@ const Todos = ({ name, setAuth }) => {
                   {todo.title}
                 </h3>
                 <div className="todo_controller">
-                  <button type="button" onClick={() => deleteTodo(todo._id)}>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      const deleted = await deleteTodo(todo._id);
+                      if (deleted === todo._id) {
+                        setTodos(todos.filter((t) => t._id !== deleted));
+                      }
+                    }}
+                  >
                     <i className="fas fa-trash-alt"> del</i>
                   </button>
                   <button
@@ -107,6 +114,8 @@ const Todos = ({ name, setAuth }) => {
           setShow={setShow}
           setTodo={setTodo}
           todo={todo}
+          setTodos={setTodos}
+          todos={todos}
         />
       )}
     </>
