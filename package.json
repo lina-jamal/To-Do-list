@@ -33,6 +33,7 @@
     "env2": "^2.2.2",
     "google-auth-library": "^6.1.1",
     "jsonwebtoken": "^8.5.1",
+    "react-icons": "^3.11.0",
     "react-loader-spinner": "^3.1.14",
     "react-router-dom": "^5.2.0"
   }
