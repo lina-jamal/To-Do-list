@@ -1,7 +1,15 @@
 import React from "react";
 import DateTimePicker from "react-datetime-picker";
 import { addTodo, editTodo, clearItems, setValue } from "./function";
-const TodoForm = ({ todo, setTodo, setShow, edit, setEdit }) => {
+const TodoForm = ({
+  todo,
+  setTodo,
+  setShow,
+  edit,
+  setEdit,
+  setTodos,
+  todos,
+}) => {
   const { id, title, description, time, important, done } = todo;
 
   return (
@@ -77,8 +85,25 @@ const TodoForm = ({ todo, setTodo, setShow, edit, setEdit }) => {
           onClick={(e) => {
             e.preventDefault();
             edit
-              ? editTodo({ id, title, description, time, important, done })
-              : addTodo({ title, description, time, important, done });
+              ? editTodo({
+                  id,
+                  title,
+                  description,
+                  time,
+                  important,
+                  done,
+                  setTodos,
+                  todos,
+                })
+              : addTodo({
+                  title,
+                  description,
+                  time,
+                  important,
+                  done,
+                  setTodos,
+                  todos,
+                });
             clearItems(setTodo, setEdit, setShow);
           }}
         >

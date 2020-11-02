@@ -6,6 +6,8 @@ export const addTodo = async ({
   time,
   important,
   done,
+  setTodos,
+  todos,
 }) => {
   try {
     const { data } = await axios.post("/api/v1/Todo", {
@@ -15,7 +17,11 @@ export const addTodo = async ({
       important,
       done,
     });
+    const { message, inserted } = data;
 
+    if (message === "Todo successfully created ") {
+      setTodos([...todos, inserted]);
+    }
     return data;
   } catch (err) {
     throw err;
@@ -29,6 +35,8 @@ export const editTodo = async ({
   time,
   important,
   done,
+  setTodos,
+  todos,
 }) => {
   try {
     const { data } = await axios.put(`/api/v1/Todos/${id}`, {
@@ -38,8 +46,14 @@ export const editTodo = async ({
       important,
       done,
     });
-    const { msg } = data;
-    return msg;
+    const { todoEdit, msg } = data;
+    if (msg === "todo updated") {
+      const newTodos = todos.map((oldTodo) =>
+        oldTodo._id === todoEdit._id ? todoEdit : oldTodo
+      );
+      setTodos(newTodos);
+    }
+    return data;
   } catch (err) {
     throw err;
   }
