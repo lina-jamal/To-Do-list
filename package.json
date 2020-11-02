@@ -11,6 +11,7 @@
     "dev": "NODE_ENV=development nodemon server/src/index.js",
     "kill": "fuser -k 5000/tcp",
     "heroku-postbuild": "cd client && npm install && npm run build",
+    "build": "cd client && npm install && npm run build",
     "build:database": "node src/database/index.js"
   },
   "repository": {
