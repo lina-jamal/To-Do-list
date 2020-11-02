@@ -3,6 +3,13 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import TodoForm from "../todoForm";
 import Header from "../../header";
+import { AiFillEdit } from "react-icons/ai";
+import { FaTrashAlt } from "react-icons/fa";
+import { ImPower } from "react-icons/im";
+import { IoMdDoneAll } from "react-icons/io";
+
+import "./style.css";
+
 import { fetchTodo, editTodo, deleteTodo } from "./function";
 
 const Todos = ({ name, setAuth }) => {
@@ -38,66 +45,71 @@ const Todos = ({ name, setAuth }) => {
     <>
       <Header name={name} setAuth={setAuth} addTodo={addTodo} />
       <div className="todoContainer">
-        <button type="button" onClick={() => addTodo()}>
-          Add Todo
-        </button>
-        <div className="mytodo">
+        <div className="all_todos">
           {!loading && todos.length > 0 ? (
             todos.map((todo) => (
               <div key={todo._id} className="todo">
-                <h3
-                  onClick={() =>
-                    editTodo(
-                      todo._id,
-                      todo.title,
-                      todo.description,
-                      todo.time,
-                      todo.important,
-                      todo.done,
-                      setShow,
-                      setEdit,
-                      setTodo
-                    )
-                  }
-                >
-                  {todo.title}
-                </h3>
-                <div className="todo_controller">
-                  <button
-                    type="button"
-                    onClick={async () => {
-                      const deleted = await deleteTodo(todo._id);
-                      if (deleted === todo._id) {
-                        setTodos(todos.filter((t) => t._id !== deleted));
-                      }
-                    }}
-                  >
-                    <i className="fas fa-trash-alt"> del</i>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      editTodo(
-                        todo._id,
-                        todo.title,
-                        todo.description,
-                        todo.time,
-                        todo.important,
-                        todo.done,
-                        setShow,
-                        setEdit,
-                        setTodo
-                      )
+                <div className="todo_top">
+                  <h3
+                    style={
+                      todo.done
+                        ? { textDecoration: "line-through" }
+                        : { textDecoration: "none" }
                     }
                   >
-                    <i className="fas fa-edit"> edit</i>
-                  </button>
+                    {todo.title}
+                  </h3>
+                  <div className="todo_icons">
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        const deleted = await deleteTodo(todo._id);
+                        if (deleted === todo._id) {
+                          setTodos(todos.filter((t) => t._id !== deleted));
+                        }
+                      }}
+                    >
+                      <FaTrashAlt />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        editTodo(
+                          todo._id,
+                          todo.title,
+                          todo.description,
+                          todo.time,
+                          todo.important,
+                          todo.done,
+                          setShow,
+                          setEdit,
+                          setTodo
+                        )
+                      }
+                    >
+                      <AiFillEdit />
+                    </button>
+                    {todo.done ? (
+                      <IoMdDoneAll color="green" width="30" />
+                    ) : null}
+                    {todo.important ? <ImPower color="#cb3737" /> : null}
+                  </div>
                 </div>
-                <p>{todo.description}</p>
-                <span>{todo.emportant}</span>
-                <span>{todo.dine}</span>
+                <div className="todo-bottom">
+                  <br></br>
+                  <span>{todo.description}</span>
+                  {todo.important ? (
+                    <>
+                      <span style={{ color: "rgb(202, 5, 5)" }}>
+                        {" "}
+                        You must doing this task as soon
+                      </span>{" "}
+                      <br></br>
+                    </>
+                  ) : null}
 
-                <span>{todo.time}</span>
+                  <span>{todo.time}</span>
+                </div>
               </div>
             ))
           ) : (

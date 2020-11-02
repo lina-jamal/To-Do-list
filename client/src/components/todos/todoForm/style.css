@@ -1,5 +1,7 @@
 .form-container {
-  margin: 0px auto;
+  position: fixed;
+  top: 18%;
+  left: 20%;
   text-align: center;
   border-radius: 8px;
   padding: 2%;
@@ -8,6 +10,7 @@
   width: 25%;
   min-width: 280px;
   color: rgb(82, 64, 64);
+  z-index: 1;
 }
 .form-container label {
   width: 80%;
