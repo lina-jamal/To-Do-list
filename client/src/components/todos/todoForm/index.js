@@ -1,6 +1,7 @@
 import React from "react";
 import DateTimePicker from "react-datetime-picker";
 import { addTodo, editTodo, clearItems, setValue } from "./function";
+import "./style.css";
 const TodoForm = ({
   todo,
   setTodo,
@@ -14,8 +15,9 @@ const TodoForm = ({
 
   return (
     <>
-      <form>
+      <form className="form-container">
         <h2>{edit ? "Edit" : "Add"} Your Todo</h2>
+        <br></br>
         <label>
           Title
           <input
@@ -70,46 +72,48 @@ const TodoForm = ({
           />
         </label>
         <br />
-        <button
-          type="button"
-          className="todobtn"
-          onClick={() => {
-            clearItems(setTodo, setEdit, setShow);
-          }}
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          className="todobtn"
-          onClick={(e) => {
-            e.preventDefault();
-            edit
-              ? editTodo({
-                  id,
-                  title,
-                  description,
-                  time,
-                  important,
-                  done,
-                  setTodos,
-                  todos,
-                })
-              : addTodo({
-                  title,
-                  description,
-                  time,
-                  important,
-                  done,
-                  setTodos,
-                  todos,
-                });
-            clearItems(setTodo, setEdit, setShow);
-          }}
-        >
-          {" "}
-          {edit ? "Edit" : "Add Todo"}
-        </button>
+        <div className="btn-container">
+          <button
+            type="button"
+            className="todo_btn"
+            onClick={() => {
+              clearItems(setTodo, setEdit, setShow);
+            }}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="todo_btn"
+            onClick={(e) => {
+              e.preventDefault();
+              edit
+                ? editTodo({
+                    id,
+                    title,
+                    description,
+                    time,
+                    important,
+                    done,
+                    setTodos,
+                    todos,
+                  })
+                : addTodo({
+                    title,
+                    description,
+                    time,
+                    important,
+                    done,
+                    setTodos,
+                    todos,
+                  });
+              clearItems(setTodo, setEdit, setShow);
+            }}
+          >
+            {" "}
+            {edit ? "Edit" : "Add Todo"}
+          </button>
+        </div>
       </form>
     </>
   );

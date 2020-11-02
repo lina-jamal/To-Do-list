@@ -1,0 +1,46 @@
+.form-container {
+  margin: 0px auto;
+  text-align: center;
+  border-radius: 8px;
+  padding: 2%;
+  background-color: #73bfbe;
+  box-shadow: 1px 5px 14px 2px #0b0d0c;
+  width: 25%;
+  min-width: 280px;
+  color: rgb(82, 64, 64);
+}
+.form-container label {
+  width: 80%;
+  margin-left: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-container input,
+.form-container select {
+  width: 50%;
+  text-align: center;
+  font-size: 12px;
+  outline: none;
+}
+
+.react-datetime-picker__button svg {
+  width: 15px;
+  height: 15px;
+}
+
+.btn-container .todo_btn {
+  width: 35%;
+  margin-left: 5px;
+  cursor: pointer;
+  outline: none;
+  height: 30px;
+  background: rgb(82, 64, 64);
+  color: white;
+  border: 0.1px solid rgb(82, 64, 64);
+  border-radius: 3px;
+}
+.btn-container .todo_btn:hover {
+  color: rgb(82, 64, 64);
+  background: transparent;
+}
