@@ -13,7 +13,7 @@ const addTodo = async (req, res, next) => {
       });
     const interfereTime = await Todos.find({ userID: userId, time });
     if (interfereTime.length === 0) {
-      await Todos.create({
+      const inserted = await Todos.create({
         userID: userId,
         title,
         description,
@@ -21,7 +21,10 @@ const addTodo = async (req, res, next) => {
         done,
         time,
       });
-      res.json("Todo successfully created ");
+      res.json({
+        message: "Todo successfully created ",
+        inserted,
+      });
     } else {
       res.status(400).json("Sorry ... You have interfere at this time");
     }
