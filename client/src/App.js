@@ -30,12 +30,14 @@ function App() {
           exact
           path="/"
           render={() =>
-            !auth ? <Login setAuth={setAuth} /> : <Todos name={name} />
+            !auth ? (
+              <Login setAuth={setAuth} />
+            ) : (
+              <Todos name={name} setAuth={setAuth} />
+            )
           }
         ></Route>
       </Router>
-      {/* <Login setAuth={setAuth} />
-      <Todos name={name} /> */}
     </>
   );
 }
