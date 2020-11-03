@@ -102,7 +102,7 @@ const Todos = ({ name, setAuth }) => {
                     <>
                       <span style={{ color: "rgb(202, 5, 5)" }}>
                         {" "}
-                        You must doing this task as soon
+                        You must be doing this task as soon as
                       </span>{" "}
                       <br></br>
                     </>
@@ -114,7 +114,16 @@ const Todos = ({ name, setAuth }) => {
             ))
           ) : (
             // <h2>Loading ....!</h2>
-            <Loader type="ThreeDots" color="#00BFFF" height={60} width={60} />
+            // <Loader type="ThreeDots" color="#00BFFF" height={60} width={60} />
+            <div className="empty_todos">
+              <h3>
+                {" "}
+                Hello <span style={{ color: "#b32020" }}>{name}</span> , I wish
+                you a happy day ...{" "}
+              </h3>
+              <br></br>
+              <h4> Thank you for using my App</h4>
+            </div>
           )}
         </div>
       </div>

@@ -4,6 +4,12 @@
   color: rgb(19, 13, 13);
   font-size: 20px;
 }
+.empty_todos {
+  width: 70%;
+  margin: 9%;
+  color: rgb(19, 13, 13);
+  font-size: 20px;
+}
 .all_todos {
   display: flex;
   flex-direction: column;
