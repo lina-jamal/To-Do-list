@@ -16,7 +16,6 @@ function App() {
       setName(name);
       setAuth(true);
     } catch (error) {
-      setName("");
       throw error;
     }
   };
