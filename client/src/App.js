@@ -30,7 +30,7 @@ function App() {
           path="/"
           render={() =>
             !auth ? (
-              <Login setAuth={setAuth} />
+              <Login setAuth={setAuth} setName={setName} />
             ) : (
               <Todos name={name} setAuth={setAuth} />
             )

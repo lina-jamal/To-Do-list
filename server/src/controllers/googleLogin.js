@@ -7,11 +7,12 @@ const googleLogin = async (req, res, next) => {
     const { name } = await verifyGoogleToken(tokenId);
 
     payload = { userId: googleId, name };
-
     const token = await signToken(payload);
-    return res
-      .cookie("token", token)
-      .json({ statusCode: 200, message: "logged in successfully" });
+    return res.cookie("token", token).json({
+      statusCode: 200,
+      message: "logged in successfully",
+      payload: payload,
+    });
   } catch (err) {
     return next(err);
   }

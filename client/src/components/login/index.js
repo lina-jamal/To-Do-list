@@ -3,15 +3,20 @@ import { GoogleLogin } from "react-google-login";
 import "./style.css";
 const axios = require("axios");
 
-function Login({ setAuth }) {
+function Login({ setAuth, setName }) {
   const failureResponse = (response) => {
     console.log("error", response);
   };
   const successResponse = async (res) => {
-    const { tokenId, googleId } = res;
+    const { tokenId, googleId, profileObj } = res;
 
     try {
-      await axios.post("/api/v1/login/google", { tokenId, googleId });
+      const response = await axios.post("/api/v1/login/google", {
+        tokenId,
+        googleId,
+      });
+      const { name } = response.data.payload;
+      setName(name);
       setAuth(true);
     } catch (err) {
       console.log(err);
